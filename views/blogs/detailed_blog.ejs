@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/header.ejs') %>
+  <%- include('../partials/nav.ejs') %>
+
+<body>
+    <main class="container">
+        <% if (blog) { %>
+            <div class="delete-button-container">
+                <button class="delete-button">
+                 <a class="delete" data-doc="<%=blog.id%>">DELETE</a>
+                  <i class="fa fa-trash"></i>
+                </button>
+              </div>
+            <h2><%= blog.title %></h2>
+
+            <p><%= blog.snippet %></p>
+            <hr>
+            <p><%= blog.body %></p>
+
+        <% } else { %>
+            <p>No blog available.</p>
+        <% } %>
+
+    </main>
+    <script src="https://kit.fontawesome.com/a527233462.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVFQWqc3pXh5ROAeVgVAvbL3WN9DwtzWMiCDFfA6VAES1eYjOdL5y" crossorigin="anonymous"></script>
+    <script>
+        const blog_to_delete = document.querySelector('a.delete');
+        blog_to_delete.addEventListener('click', (e) => {
+            const endPoint = `/blogs/${blog_to_delete.dataset.doc}`
+            console.log(`Endpoint: ${endPoint}`);
+            fetch(endPoint, {
+                method: 'DELETE'
+            })
+            .then((response) => {window.location.href = '/blogs'})
+            // .then((data) => {
+            //     console.log(`Received RSP: ${data.redirect}`)
+            //     window.location.href = '/blogs'
+            // })
+            .catch((err) => {console.log("Error in Delete REponse: ", err)})
+        });
+    </script>
+   <style>
+        .delete-button-container {
+            position: absolute;
+            right: 10px; /* Adjust right position as needed */
+        }
+
+        .delete-button {
+            background-color: transparent;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+            transition: all 0.2s ease-in-out;
+        }
+
+        .delete-button:hover {
+            transform: scale(1.1); /* Increase size slightly on hover */
+            color: red; /* Change icon color on hover */
+        }
+
+        .fa-trash {
+            font-size: 20px; /* Adjust font size as needed */
+        }
+
+    </style>
+</body>
+</html>
+<%- include('../partials/footer.ejs') %>

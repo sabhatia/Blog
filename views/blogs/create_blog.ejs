@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/header.ejs') %>
+  <%- include('../partials/nav.ejs') %>
+
+<body>
+  <main class="container">
+    <h1>Create New Blog</h1>
+    <form method="POST" action="/create-blog">  <div class="mb-3">
+        <label for="blogTitle" class="form-label">Blog Title</label>
+        <input type="text" class="form-control" id="blogTitle" name="title" required>
+      </div>
+      <div class="mb-3">
+        <label for="shortDescription" class="form-label">Blog Snippet</label>
+        <textarea class="form-control" id="blogSnippet" name="snippet" rows="3" required></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="blogDetails" class="form-label">Blog Details</label>
+        <textarea class="form-control" id="blogBody" name="body" rows="10" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Create Blog</button>
+    </form>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVFQWqc3pXh5ROAeVgVAvbL3WN9DwtzWMiCDFfA6VAES1eYjOdL5y" crossorigin="anonymous"></script>
+</body>
+</html>
+<%- include('../partials/footer.ejs') %>
+
+**Note:**
+
+* The `active` class is added to the "Create Blog" link in the navbar.
+* A form is included with fields for blog title, short description, and blog details. 
+* Make sure to replace `/create-blog` in the form's `action` attribute with the actual route where you want to submit the form data for creating a blog.
